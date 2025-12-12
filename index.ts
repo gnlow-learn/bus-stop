@@ -48,8 +48,7 @@ export const map = new Map({
         }),
         new layer.Vector({
             source: new source.Cluster({
-                distance: 20,
-                minDistance: 10,
+                distance: 30,
                 source: vs,
             }),
             style: feature => new style.Style({
