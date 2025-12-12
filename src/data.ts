@@ -58,8 +58,8 @@ const lonLatFix =
 const Raw = z.object({
     정류장번호:     z.string(),
     정류장명:       z.string(),
-    위도:          z.coerce.number().min(-33).max(39).optional(),
-    경도:          z.coerce.number().min(124).max(132).optional(),
+    위도:          z.coerce.number().min(33).max(39).optional(),
+    경도:          z.coerce.number().min(125).max(132).optional(),
     정보수집일:     z.coerce.date(),
     모바일단축번호:  z.string().optional(),
     도시코드:       z.string(),
