@@ -1,5 +1,3 @@
-import raw from "../orig/국토교통부_전국 버스정류장 위치정보_20251031.csv" with { type: "bytes" }
-
 import * as z from "https://esm.sh/zod@4.1.13"
 
 const decode =
@@ -67,7 +65,9 @@ const Raw = z.object({
     관리도시명:     z.string(),
 })
 
-export const data = z.array(Raw).parse(
-    wrap(split(decode(raw)))
-        .map(lonLatFix)
-)
+export const parse =
+(raw: Uint8Array<ArrayBuffer>) =>
+    z.array(Raw).parse(
+        wrap(split(decode(raw)))
+            .map(lonLatFix)
+    )
