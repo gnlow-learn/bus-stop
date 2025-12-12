@@ -30,8 +30,10 @@ const wrap =
     )
 }
 
+export type Raw = z.infer<typeof Raw>
+
 const lonLatFix =
-(raw: z.infer<typeof Raw>) => {
+(raw: Raw) => {
     if (raw.위도 && raw.경도) {
         if (Number(raw.위도) > Number(raw.경도)) {
             console.log("lonLatFix(swap)", raw.정류장명)
