@@ -30,18 +30,42 @@ const wrap =
     )
 }
 
-const Raw = z.array(
-    z.object({
-        정류장번호:     z.string(),
-        정류장명:       z.string(),
-        위도:          z.coerce.number().min(-33).max(39).optional(),
-        경도:          z.coerce.number().min(124).max(132).optional(),
-        정보수집일:     z.coerce.date(),
-        모바일단축번호:  z.string().optional(),
-        도시코드:       z.string(),
-        도시명:        z.string(),
-        관리도시명:     z.string(),
-    })
-)
+const lonLatFix =
+(raw: z.infer<typeof Raw>) => {
+    if (raw.위도 && raw.경도) {
+        if (Number(raw.위도) > Number(raw.경도)) {
+            console.log("lonLatFix(swap)", raw.정류장명)
+            return {
+                ...raw,
+                위도: raw.경도,
+                경도: raw.위도,
+            }
+        }
+        if (raw.위도 == raw.경도) {
+            console.log("lonLatFix(naaa)", raw.정류장명)
+            return {
+                ...raw,
+                위도: undefined,
+                경도: undefined,
+            }
+        }
+    }
+    return raw
+}
 
-export const data = Raw.parse(wrap(split(decode(raw))))
+const Raw = z.object({
+    정류장번호:     z.string(),
+    정류장명:       z.string(),
+    위도:          z.coerce.number().min(-33).max(39).optional(),
+    경도:          z.coerce.number().min(124).max(132).optional(),
+    정보수집일:     z.coerce.date(),
+    모바일단축번호:  z.string().optional(),
+    도시코드:       z.string(),
+    도시명:        z.string(),
+    관리도시명:     z.string(),
+})
+
+export const data = z.array(Raw).parse(
+    wrap(split(decode(raw)))
+        .map(lonLatFix)
+)
