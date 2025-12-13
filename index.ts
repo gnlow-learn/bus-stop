@@ -15,7 +15,7 @@ import * as style from "https://esm.sh/ol@10.7.0/style"
 import { parse } from "./src/parse.ts"
 
 const data = parse(
-    await fetch("http://cdn.jsdelivr.net/gh/gnlow/raw@0.1.0/file/1db7e5d0")
+    await fetch("https://cdn.jsdelivr.net/gh/gnlow/raw@0.1.0/file/1db7e5d0")
         .then(x => x.bytes())
 )
 
