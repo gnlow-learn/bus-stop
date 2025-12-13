@@ -11,5 +11,6 @@
                 "no-import-prefix"
             ]
         }
-    }
+    },
+    "lock": false
 }

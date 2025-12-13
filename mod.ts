@@ -1,5 +1,5 @@
 import { parse } from "./src/parse.ts"
-import raw from "./orig/국토교통부_전국 버스정류장 위치정보_20251031.csv?raw" with { type: "bytes" }
+import raw from "http://cdn.jsdelivr.net/gh/gnlow/raw@0.1.0/file/1db7e5d0" with { type: "bytes" }
 
 const data = parse(raw)
 

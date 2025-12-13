@@ -15,7 +15,7 @@ import * as style from "https://esm.sh/ol@10.7.0/style"
 import { parse } from "./src/parse.ts"
 
 const data = parse(
-    await fetch("./orig/국토교통부_전국 버스정류장 위치정보_20251031.csv")
+    await fetch("http://cdn.jsdelivr.net/gh/gnlow/raw@0.1.0/file/1db7e5d0")
         .then(x => x.bytes())
 )
 
